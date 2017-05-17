@@ -6,6 +6,8 @@ import { Provider } from 'react-redux'
 import { App } from './components'
 import reducers from './reducers'
 
+import './global/loadEnv'
+
 import { createDevTools } from 'redux-devtools'
 import LogMonitor from 'redux-devtools-log-monitor';
 // import SliderMonitor from 'redux-slider-monitor';

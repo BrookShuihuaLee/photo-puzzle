@@ -3,11 +3,9 @@ import webpack from 'webpack'
 import HtmlPlugin from 'html-webpack-plugin'
 import webpackMd5Hash from 'webpack-md5-hash'
 
-import packageJson from '../package.json'
-
 export default {
     entry: {
-        vendor: Object.keys(packageJson.dependencies),
+        vendor: ['babel-polyfill'],
         bundle: path.resolve(__dirname, '../src/entry.js')
     },
     output: {
@@ -29,10 +27,20 @@ export default {
     },
     plugins: [
         new webpackMd5Hash(),
-        new webpack.optimize.CommonsChunkPlugin({name: 'vendor'}),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: "vendor",
+            minChunks: function (module) {
+                return module.context && module.context.indexOf("node_modules") !== -1;
+            }
+        }),
         new HtmlPlugin({
             title: '拼出我的照片',
             template: path.resolve(__dirname, '../src/index.pug')
         })
-    ]
+    ],
+    resolve: {
+        alias: {
+            'bce-sdk-js': 'bce-sdk-js/baidubce-sdk.bundle.min.js'
+        }
+    }
 }

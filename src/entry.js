@@ -6,6 +6,8 @@ import { Provider } from 'react-redux'
 import reducers from './reducers'
 import { App } from './components'
 
+import './global/loadEnv'
+
 render(
     <Provider store={createStore(reducers)}>
         <App />
