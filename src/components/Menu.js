@@ -5,7 +5,7 @@ import { Link, withRouter } from 'react-router-dom'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
 import ListIcon from 'material-ui/svg-icons/action/list'
 import DashBoardIcon from 'material-ui/svg-icons/action/dashboard'
-import MailIcon from 'material-ui/svg-icons/communication/mail-outline'
+import FaceIcon from 'material-ui/svg-icons/action/face'
 import ShareIcon from 'material-ui/svg-icons/social/share'
 import Dialog from 'material-ui/Dialog'
 import { GridList, GridTile } from 'material-ui/GridList'
@@ -90,7 +90,7 @@ class Menu extends Component {
                                 style={STYLES.LINK_STYLE}
                             >
                                 <IconButton>
-                                    <MailIcon color={teal500} />
+                                    <FaceIcon color={teal500} />
                                 </IconButton>
                                 <div style={{ color: teal500 }}>关于</div>
                             </Link>
