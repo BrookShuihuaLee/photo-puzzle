@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { HashRouter as Router, Route } from 'react-router-dom'
+import { HashRouter as Router, Route, Redirect } from 'react-router-dom'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
-import { Menu, Home, Bar, Foo } from '.'
+import { Menu, Puzzle, Share, About } from '.'
 
 export default class App extends Component {
     render() {
@@ -11,9 +11,10 @@ export default class App extends Component {
                 <Router>
                     <main>
                         <Menu />
-                        <Route exact path="/" component={Home} />
-                        <Route path="/bar" component={Bar} />
-                        <Route path="/foo" component={Foo} />
+                        <Route exact path="/" render={() => <Redirect to="/puzzle" />} />
+                        <Route path="/puzzle" component={Puzzle} />
+                        <Route path="/share" component={Share} />
+                        <Route path="/about" component={About} />
                     </main>
                 </Router>
             </MuiThemeProvider>

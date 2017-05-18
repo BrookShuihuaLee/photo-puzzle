@@ -13,7 +13,7 @@ class Home extends Component {
                 <button onClick={() => this.props.decrease(1)}>Decrease</button>
                 {
                     this.props.number === 5 ? <Redirect to={{
-                        pathname: '/bar'
+                        pathname: '/share'
                     }} /> : null
                 }
             </article>

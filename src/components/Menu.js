@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
+import { Link, withRouter } from 'react-router-dom'
+
 import FloatingActionButton from 'material-ui/FloatingActionButton'
 import ListIcon from 'material-ui/svg-icons/action/list'
 import DashBoardIcon from 'material-ui/svg-icons/action/dashboard'
@@ -19,7 +21,13 @@ const STYLES = Object.freeze({
     }
 })
 
-export default class Menu extends Component {
+class Menu extends Component {
+    static propTypes = {
+        match: PropTypes.object.isRequired,
+        location: PropTypes.object.isRequired,
+        history: PropTypes.object.isRequired
+    }
+    
     state = {
         open: false
     }
@@ -33,6 +41,8 @@ export default class Menu extends Component {
     }
 
     render() {
+        if (this._lastLocation !== this.props.location) setTimeout(this.closeMenu)
+        this._lastLocation = this.props.location
         return (
             <header>
                 <FloatingActionButton
@@ -51,9 +61,9 @@ export default class Menu extends Component {
                     >
                         <GridTile style={STYLES.MENU_ITEM_STYLE} >
                             <Link
-                                to="/"
+                                to="/puzzle"
+                                replace
                                 style={STYLES.LINK_STYLE}
-                                onTouchTap={this.closeMenu}
                             >
                                 <IconButton>
                                     <DashBoardIcon color={teal500} />
@@ -63,9 +73,9 @@ export default class Menu extends Component {
                         </GridTile>
                         <GridTile style={STYLES.MENU_ITEM_STYLE} >
                             <Link
-                                to="/bar"
+                                to="/share"
+                                replace
                                 style={STYLES.LINK_STYLE}
-                                onTouchTap={this.closeMenu}
                             >
                                 <IconButton>
                                     <ShareIcon color={teal500} />
@@ -75,9 +85,9 @@ export default class Menu extends Component {
                         </GridTile>
                         <GridTile style={STYLES.MENU_ITEM_STYLE} >
                             <Link
-                                to="/foo"
+                                to="/about"
+                                replace
                                 style={STYLES.LINK_STYLE}
-                                onTouchTap={this.closeMenu}
                             >
                                 <IconButton>
                                     <MailIcon color={teal500} />
@@ -91,3 +101,5 @@ export default class Menu extends Component {
         )
     }
 }
+
+export default withRouter(Menu)
