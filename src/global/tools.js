@@ -1,7 +1,5 @@
 import { BosClient } from 'bce-sdk-js'
 
-import { RESPONSE_STATE } from './constants'
-
 export default uploadImage = (blob) => {
     let prefix = new Date().getTime().toString(36)
     let surfix = (Math.random().toString(36) + '0000').substr(2, 4)
@@ -15,10 +13,8 @@ export default uploadImage = (blob) => {
         .putObjectFromBlob('images', `${prefix}-${surfix}.png`, blob)
         .then(response => {
             console.log('uploadImage success: ', response)
-            return RESPONSE_STATE.SUCCESS
         })
         .catch(error => {
             console.error('uploadImage failed: ', error)
-            return RESPONSE_STATE.FAILED
         })
 }

@@ -12,14 +12,19 @@ import { GridList, GridTile } from 'material-ui/GridList'
 import IconButton from 'material-ui/IconButton'
 import { teal500 } from 'material-ui/styles/colors'
 
-const STYLES = Object.freeze({
+const STYLES = {
+    HEADER_STYLE: {
+        position: 'absolute',
+        left: '10px',
+        top: '10px'
+    },
     MENU_ITEM_STYLE: {
         textAlign: 'center'
     },
     LINK_STYLE: {
         textDecoration: 'none'
     }
-})
+}
 
 class Menu extends Component {
     static propTypes = {
@@ -27,7 +32,7 @@ class Menu extends Component {
         location: PropTypes.object.isRequired,
         history: PropTypes.object.isRequired
     }
-    
+
     state = {
         open: false
     }
@@ -44,7 +49,7 @@ class Menu extends Component {
         if (this._lastLocation !== this.props.location) setTimeout(this.closeMenu)
         this._lastLocation = this.props.location
         return (
-            <header>
+            <header style={STYLES.HEADER_STYLE}>
                 <FloatingActionButton
                     mini={true}
                     onTouchTap={this.openMenu}

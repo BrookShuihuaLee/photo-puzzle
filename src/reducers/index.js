@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 
-import count from './count'
+import puzzleImage from './puzzleImage'
 
 export default combineReducers ({
-    count
+    puzzleImage
 })

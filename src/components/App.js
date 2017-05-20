@@ -20,4 +20,12 @@ export default class App extends Component {
             </MuiThemeProvider>
         )
     }
+
+    componentDidMount() {
+        const loadingPage = document.getElementById('loadingPage')
+        loadingPage.classList.add('fadeOut')
+        setTimeout(() => {
+            loadingPage.remove()
+        }, 1000)
+    }
 }

@@ -1,9 +1,29 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { increase, decrease } from '../actions/count'
 import { Redirect } from 'react-router-dom'
 
+import { IMAGE_STATES } from '../global/constants/states'
+
 class Home extends Component {
+    render() {
+        return (
+            <article>
+                Puzzle
+                {
+                    this.props.imgState === IMAGE_STATES.NOT_EXIST ? <Redirect to={{
+                        pathname: '/share'
+                    }} /> : 'haha'
+                }
+            </article>
+        )
+    }
+}
+
+export default connect(
+    state => ({ imgState: state.puzzleImage.state })
+)(Home)
+
+/*class Home extends Component {
     render() {
         return (
             <article>
@@ -24,4 +44,4 @@ class Home extends Component {
 export default connect(
     state => ({ number: state.count.number }),
     { increase, decrease }
-)(Home)
+)(Home)*/

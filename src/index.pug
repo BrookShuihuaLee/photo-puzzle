@@ -5,4 +5,77 @@ html
     meta(name='viewport' content='width=device-width, initial-scale=1, user-scalable=0, maximum-scale=1, minimum-scale=1')
     title= htmlWebpackPlugin.options.title
   body
+    #loadingPage
+      .container
+        .cube1
+        .cube2
+        .cube3
+      style.
+        #loadingPage {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          background: white;
+        }
+
+        #loadingPage .container {
+          margin: 100px auto;
+          width: 70px;
+          height: 70px;
+          position: relative;
+        }
+        
+        .cube1, .cube2, .cube3 {
+          width: 30px;
+          height: 30px;
+          position: absolute;
+          top: 0;
+          left: 0;
+          
+          animation: cubemove 2s infinite ease-in-out;
+        }
+
+        #loadingPage .cube1 {
+          background-color: #4FC3F7;
+        }
+        
+        #loadingPage .cube2 {
+          background-color: #7986CB;
+          border-radius: 30px;
+
+          animation-delay: -1s;
+        }
+
+        #loadingPage .cube3 {
+          width: 0;
+          height: 0;
+          border-left: 15px solid transparent;
+          border-right: 15px solid transparent;
+          border-bottom: 30px solid #4DD0E1;
+
+          animation-delay: -0.5s;
+        }
+        
+        @keyframes cubemove {
+          25% {
+            transform: translateX(40px);
+          } 50% {
+            transform: translateX(40px) translateY(40px);
+          } 75% {
+            transform: translateY(40px);;
+          }
+        }
+
+        .fadeOut {
+          opacity: 0;
+          animation: fadeOut 1s;
+        }
+
+        @keyframes fadeOut {
+          0% {
+            opacity: 1;
+          }
+        }
     #mount
+</div>
