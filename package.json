@@ -25,6 +25,8 @@
     "babel-preset-stage-1": "^6.5.0",
     "html-webpack-plugin": "^2.28.0",
     "koa": "^2.2.0",
+    "koa-log": "^2.1.0",
+    "koa-router": "^7.1.1",
     "pug": "^2.0.0-rc.1",
     "pug-loader": "^2.3.0",
     "qiniu": "^6.1.13",
@@ -51,7 +53,8 @@
     "build": "webpack --config ./ui/webpack/config.babel.js",
     "dev": "webpack-dev-server --config ./ui/webpack/dev.config.babel.js",
     "clean": "find ./ui/dist | grep dist/ | grep -v .gitignore | xargs rm",
-    "cb": "npm run clean & npm run build"
+    "cb": "npm run clean & npm run build",
+    "server": "pm2 delete ./server/app.js & pm2 start ./server/app.js"
   },
   "repository": {
     "type": "git",
