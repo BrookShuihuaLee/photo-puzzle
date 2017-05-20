@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import RaisedButton from 'material-ui/RaisedButton'
+import { randomImage } from '../actions/updateImageState'
+import { connect } from 'react-redux'
 
 const STYLES = {
     CHOOSE_IMG_CONTAINER_STYLE: {
@@ -18,7 +20,7 @@ const STYLES = {
     }
 }
 
-export default class Foo extends Component {
+class Share extends Component {
     state = {
         imageHeight: undefined
     }
@@ -39,15 +41,20 @@ export default class Foo extends Component {
             <article>
                 <div style={STYLES.CHOOSE_IMG_CONTAINER_STYLE}>
                     <div style={STYLES.CHOOSE_IMG_BTN_CONTAINER_STYLE}>
-                        <RaisedButton label='随机来一张' style={STYLES.BUTTON_STYLE} />
+                        <RaisedButton label='随便来一张' style={STYLES.BUTTON_STYLE} onTouchTap={this.props.randomImage} />
                         <RaisedButton label='上传照片' style={STYLES.BUTTON_STYLE} />
                     </div>
                     <div ref='imageContainer' style={imageContainerStyle}>
                         IMAGE_CONTAINER_STYLE
                     </div>
                 </div>
-                <div>haha</div>
+                <div>{this.props.imgState.toString()}</div>
             </article>
         )
     }
 }
+
+export default connect(
+    state => ({ imgState: state.puzzleImage.state }),
+    { randomImage }
+)(Share)

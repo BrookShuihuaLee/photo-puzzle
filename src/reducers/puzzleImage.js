@@ -1,17 +1,16 @@
-import { UPDATE_IMAGE_STATE } from '../global/constants/actionTypes'
-import { IMAGE_STATES } from '../global/constants/states'
+import { UPDATE_IMAGE_STATE } from '../constants/actionTypes'
+import { IMAGE_STATES } from '../constants/states'
 
-const initialState = {
+export default function (state = {
     state: IMAGE_STATES.NOT_EXIST,
+    path: null,
     blob: null
-}
-
-export default function (state = initialState, action) {
+}, action) {
     switch (action.type) {
         case UPDATE_IMAGE_STATE:
             return {
                 ...state,
-                state: action.type
+                ...action.state
             }
         default:
             return state

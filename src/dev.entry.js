@@ -1,6 +1,7 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { createStore } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
+import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
 
 import { App } from './components'
@@ -25,7 +26,7 @@ const DevTools = createDevTools(
 )
 
 render(
-    <Provider store={createStore(reducers, DevTools.instrument())}>
+    <Provider store={createStore(reducers, compose(applyMiddleware(thunk), DevTools.instrument()))}>
         <div>
             <App />
             <DevTools />
