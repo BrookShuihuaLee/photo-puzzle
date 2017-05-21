@@ -1,1 +1,0 @@
-export const ORIGIN = 'http://photo-puzzle.gz.bcebos.com'

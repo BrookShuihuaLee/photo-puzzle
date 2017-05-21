@@ -2,6 +2,7 @@ import path from 'path'
 import webpack from 'webpack'
 import HtmlPlugin from 'html-webpack-plugin'
 import webpackMd5Hash from 'webpack-md5-hash'
+import ScriptExtHtmlWebpackPlugin from 'script-ext-html-webpack-plugin'
 
 export default {
     entry: {
@@ -36,6 +37,9 @@ export default {
         new HtmlPlugin({
             title: '拼出我的照片',
             template: path.resolve(__dirname, '../src/index.pug')
+        }),
+        new ScriptExtHtmlWebpackPlugin({
+            defaultAttribute: 'defer'
         })
     ],
     resolve: {
