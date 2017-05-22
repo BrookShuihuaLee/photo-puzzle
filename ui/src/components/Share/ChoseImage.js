@@ -9,8 +9,11 @@ import _ from 'lodash'
 import {
     downloadImageRandom,
     uploadImage
-} from '../../actions/updateImageState'
-import { updatePaperHeight } from '../../actions/updateForShareState'
+} from '../../actions/updatePuzzleImageState'
+import {
+    updatePaperHeight,
+    updateImagePosition
+} from '../../actions/updateForShareState'
 import { IMAGE_STATES } from '../../constants/states'
 
 const STYLES = {
@@ -57,12 +60,17 @@ class ChoseImage extends Component {
             forShare,
 
             downloadImageRandom,
-            updatePaperHeight
+            updatePaperHeight,
+            updateImagePosition
         } = this.props
 
         if (puzzleImage.state === IMAGE_STATES.NOT_EXIST) setTimeout(() => {
             const paperRoot = findDOMNode(this.refs.paper)
             if (paperRoot.offsetWidth !== forShare.paperHeight) updatePaperHeight(paperRoot.offsetWidth)
+        })
+        if (puzzleImage.state === IMAGE_STATES.EXIST) setTimeout(() => {
+            const img = findDOMNode(this.refs.img)
+            if (forShare.imageX !== img.offsetLeft || forShare.imageY !== img.offsetTop) updateImagePosition(img.offsetLeft, img.offsetTop)
         })
 
         return (
@@ -95,29 +103,34 @@ class ChoseImage extends Component {
                         transitionAppearTimeout={500}
                     >
                         {
-                            puzzleImage.blobUrl ?
-                                <img key={`IMAGE${puzzleImage.blobUrl}`}
+                            puzzleImage.state === IMAGE_STATES.EXIST ?
+                                <img
+                                    ref='img'
+                                    key={`IMAGE${puzzleImage.blobUrl}`}
                                     src={puzzleImage.blobUrl}
                                     style={STYLES.IMAGE_STYLE}
-                                /> :
-                                <Paper
-                                    key='PAPER'
-                                    ref='paper'
-                                    style={{
-                                        ...STYLES.PAPER_STYLE,
-                                        height: forShare.paperHeight
-                                    }}
-                                    zDepth={3}
-                                    circle
-                                    onTouchTap={() => this.refs.fileInput.click()}
-                                >
-                                    <span>照 片</span>
-                                </Paper>
+                                /> : null
 
                         }
                     </ReactCSSTransitionGroup>
+                    {
+                        puzzleImage.state === IMAGE_STATES.EXIST ? null :
+                            <Paper
+                                ref='paper'
+                                style={{
+                                    ...STYLES.PAPER_STYLE,
+                                    height: forShare.paperHeight
+                                }}
+                                zDepth={3}
+                                circle
+                                onTouchTap={() => this.refs.fileInput.click()}
+                            >
+                                <span>照 片</span>
+                            </Paper>
+
+                    }
                 </div>
-            </div>
+            </div >
         )
     }
 }
@@ -127,6 +140,7 @@ export default connect(
     {
         downloadImageRandom,
         uploadImage,
-        updatePaperHeight
+        updatePaperHeight,
+        updateImagePosition
     }
 )(ChoseImage)

@@ -1,4 +1,4 @@
-import { UPDATE_IMAGE_STATE } from '../constants/actionTypes'
+import { UPDATE_PUZZLE_IMAGE_STATE } from '../constants/actionTypes'
 import { IMAGE_STATES } from '../constants/states'
 
 export default function (state = {
@@ -10,7 +10,7 @@ export default function (state = {
     height: null
 }, action) {
     switch (action.type) {
-        case UPDATE_IMAGE_STATE:
+        case UPDATE_PUZZLE_IMAGE_STATE:
             return {
                 ...state,
                 ...action.state

@@ -19,3 +19,13 @@ export function updatePaperHeight(paperHeight) {
         }
     }
 }
+
+export function updateImagePosition(imageX, imageY) {
+    return {
+        type: UPDATE_FOR_SHARE_STATE,
+        state: {
+            imageX,
+            imageY
+        }
+    }
+}

@@ -1,4 +1,4 @@
-import { UPDATE_IMAGE_STATE } from '../constants/actionTypes'
+import { UPDATE_PUZZLE_IMAGE_STATE } from '../constants/actionTypes'
 import { IMAGE_STATES } from '../constants/states'
 import {
     downloadImageRandom as downloadImageRandomApi,
@@ -10,7 +10,7 @@ import { updateGridLineColor } from './updateImageGridState'
 export function uploadImage(blob) {
     return async function (dispatch) {
         dispatch({
-            type: UPDATE_IMAGE_STATE,
+            type: UPDATE_PUZZLE_IMAGE_STATE,
             state: {
                 state: IMAGE_STATES.UPLOADING
             }
@@ -19,7 +19,7 @@ export function uploadImage(blob) {
         if (res) {
             dispatch(updateGridLineColor(res.blob))
             dispatch({
-                type: UPDATE_IMAGE_STATE,
+                type: UPDATE_PUZZLE_IMAGE_STATE,
                 state: {
                     ...res,
                     state: IMAGE_STATES.EXIST
@@ -27,7 +27,7 @@ export function uploadImage(blob) {
             })
         } else {
             dispatch({
-                type: UPDATE_IMAGE_STATE,
+                type: UPDATE_PUZZLE_IMAGE_STATE,
                 state: {
                     state: IMAGE_STATES.NOT_EXIST
                 }
@@ -39,7 +39,7 @@ export function uploadImage(blob) {
 export function downloadImage(url) {
     return async function (dispatch) {
         dispatch({
-            type: UPDATE_IMAGE_STATE,
+            type: UPDATE_PUZZLE_IMAGE_STATE,
             state: {
                 state: IMAGE_STATES.DOWNLOADING
             }
@@ -48,7 +48,7 @@ export function downloadImage(url) {
         if (res) {
             dispatch(updateGridLineColor(res.blob))
             dispatch({
-                type: UPDATE_IMAGE_STATE,
+                type: UPDATE_PUZZLE_IMAGE_STATE,
                 state: {
                     ...res,
                     state: IMAGE_STATES.EXIST
@@ -57,7 +57,7 @@ export function downloadImage(url) {
         } else {
             dispatch(updateGridLineColor(res.img))
             dispatch({
-                type: UPDATE_IMAGE_STATE,
+                type: UPDATE_PUZZLE_IMAGE_STATE,
                 state: {
                     state: IMAGE_STATES.NOT_EXIST
                 }
@@ -69,7 +69,7 @@ export function downloadImage(url) {
 export function downloadImageRandom() {
     return async function (dispatch, getState) {
         dispatch({
-            type: UPDATE_IMAGE_STATE,
+            type: UPDATE_PUZZLE_IMAGE_STATE,
             state: {
                 state: IMAGE_STATES.DOWNLOADING
             }
@@ -78,7 +78,7 @@ export function downloadImageRandom() {
         if (res) {
             dispatch(updateGridLineColor(res.blob))
             dispatch({
-                type: UPDATE_IMAGE_STATE,
+                type: UPDATE_PUZZLE_IMAGE_STATE,
                 state: {
                     ...res,
                     state: IMAGE_STATES.EXIST
@@ -86,7 +86,7 @@ export function downloadImageRandom() {
             })
         } else {
             dispatch({
-                type: UPDATE_IMAGE_STATE,
+                type: UPDATE_PUZZLE_IMAGE_STATE,
                 state: {
                     state: IMAGE_STATES.NOT_EXIST
                 }
