@@ -3,7 +3,8 @@ import { UPDATE_IMAGE_GRID_STATE } from '../constants/actionTypes'
 
 export default function (state = {
     vn: INIT_PARTS_NUM,
-    hn: INIT_PARTS_NUM
+    hn: INIT_PARTS_NUM,
+    lineColor: null
 }, action) {
     switch (action.type) {
         case UPDATE_IMAGE_GRID_STATE:

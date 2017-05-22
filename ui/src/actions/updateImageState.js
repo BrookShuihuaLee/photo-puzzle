@@ -5,6 +5,7 @@ import {
     downloadImage as downloadImageApi,
     uploadImage as uploadImageApi
 } from '../apis'
+import { updateGridLineColor } from './updateImageGridState'
 
 export function uploadImage(blob) {
     return async function (dispatch) {
@@ -16,6 +17,7 @@ export function uploadImage(blob) {
         })
         let res = await uploadImageApi(blob)
         if (res) {
+            dispatch(updateGridLineColor(res.blob))
             dispatch({
                 type: UPDATE_IMAGE_STATE,
                 state: {
@@ -44,6 +46,7 @@ export function downloadImage(url) {
         })
         let res = await downloadImageApi()
         if (res) {
+            dispatch(updateGridLineColor(res.blob))
             dispatch({
                 type: UPDATE_IMAGE_STATE,
                 state: {
@@ -52,6 +55,7 @@ export function downloadImage(url) {
                 }
             })
         } else {
+            dispatch(updateGridLineColor(res.img))
             dispatch({
                 type: UPDATE_IMAGE_STATE,
                 state: {
@@ -72,6 +76,7 @@ export function downloadImageRandom() {
         })
         let res = await downloadImageRandomApi(getState().puzzleImage.path)
         if (res) {
+            dispatch(updateGridLineColor(res.blob))
             dispatch({
                 type: UPDATE_IMAGE_STATE,
                 state: {

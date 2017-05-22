@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
+import { Redirect, withRouter } from 'react-router-dom'
 
 import { IMAGE_STATES } from '../constants/states'
 
@@ -19,6 +19,6 @@ class Home extends Component {
     }
 }
 
-export default connect(
+export default withRouter(connect(
     state => ({ imgState: state.puzzleImage.state })
-)(Home)
+)(Home))

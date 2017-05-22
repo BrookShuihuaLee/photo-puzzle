@@ -125,8 +125,8 @@
 var appid = '1251735385';
 var bucket = 'ppb';
 var region = 'sh';
-var sid = 'AKIDrcCbquGQuEnEalNcHn6D7qdGhx1zHWGr';
-var skey = 'fCgx2zrpgMFzXyMbknhQzPdfZHvRnx1u';
+var sid = ['AKIDrcCbquGQuEnEalNcHn6D7qdGhx1zHWGr', 'DO NOT HURT ME, PLEASE!!!'][0];
+var skey = ['fCgx2zrpgMFzXyMbknhQzPdfZHvRnx1u', '好人一生平安'][0];
 var getSignature = function () {
     var that = this;
     var random = parseInt(Math.random() * Math.pow(2, 32));
