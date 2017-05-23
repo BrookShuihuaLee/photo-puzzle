@@ -4,7 +4,9 @@ export default function (state = {
     paperHeight: 0,
     showAdvanced: false,
     imageX: null,
-    imageY: null
+    imageY: null,
+    imageW: null,
+    imageH: null
 }, action) {
     switch (action.type) {
         case UPDATE_FOR_SHARE_STATE:

@@ -53,7 +53,7 @@ class Slides extends Component {
                         forShare.showAdvanced ?
                             <div>
                                 <div style={STYLES.SLIDE_CONTAINER_STYLE} >
-                                    <div>垂直格子数：</div>
+                                    <div>垂直划分：</div>
                                     <Slider
                                         min={MIN_PARTS_NUM}
                                         max={MAX_PARTS_NUM}
@@ -66,7 +66,7 @@ class Slides extends Component {
                                     <div style={STYLES.SLIDE_NUM_STYLE} >{imageGrid.vn}</div>
                                 </div>
                                 <div style={STYLES.SLIDE_CONTAINER_STYLE} >
-                                    <div>水平格子数：</div>
+                                    <div>水平划分：</div>
                                     <Slider
                                         min={MIN_PARTS_NUM}
                                         max={MAX_PARTS_NUM}

@@ -29,3 +29,13 @@ export function updateImagePosition(imageX, imageY) {
         }
     }
 }
+
+export function updateImageWidthAndHeight(imageW, imageH) {
+    return {
+        type: UPDATE_FOR_SHARE_STATE,
+        state: {
+            imageW,
+            imageH
+        }
+    }
+}

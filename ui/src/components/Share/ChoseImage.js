@@ -12,7 +12,8 @@ import {
 } from '../../actions/updatePuzzleImageState'
 import {
     updatePaperHeight,
-    updateImagePosition
+    updateImagePosition,
+    updateImageWidthAndHeight
 } from '../../actions/updateForShareState'
 import { IMAGE_STATES } from '../../constants/states'
 
@@ -61,7 +62,8 @@ class ChoseImage extends Component {
 
             downloadImageRandom,
             updatePaperHeight,
-            updateImagePosition
+            updateImagePosition,
+            updateImageWidthAndHeight
         } = this.props
 
         if (puzzleImage.state === IMAGE_STATES.NOT_EXIST) setTimeout(() => {
@@ -71,6 +73,7 @@ class ChoseImage extends Component {
         if (puzzleImage.state === IMAGE_STATES.EXIST) setTimeout(() => {
             const img = findDOMNode(this.refs.img)
             if (forShare.imageX !== img.offsetLeft || forShare.imageY !== img.offsetTop) updateImagePosition(img.offsetLeft, img.offsetTop)
+            if (forShare.imageW !== img.width || forShare.imageH !== img.height) updateImageWidthAndHeight(img.width, img.height)
         })
 
         return (
@@ -141,6 +144,7 @@ export default connect(
         downloadImageRandom,
         uploadImage,
         updatePaperHeight,
-        updateImagePosition
+        updateImagePosition,
+        updateImageWidthAndHeight
     }
 )(ChoseImage)
