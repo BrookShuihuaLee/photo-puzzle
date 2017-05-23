@@ -79,5 +79,9 @@ html
         }
     #mount
     - if (htmlWebpackPlugin.options.isDev) {
-      //- script(src='http://192.168.0.104:1337/vorlon.js')
+      //- <script src="https://jsconsole.com/js/remote.js?pp"></script>
+      //- <script>console.error = console.warn = console.log</script>
+    - } else {
+      each js in htmlWebpackPlugin.files.js
+        script(src=`${htmlWebpackPlugin.options.ORIGIN}/js/${js}`)
     - }

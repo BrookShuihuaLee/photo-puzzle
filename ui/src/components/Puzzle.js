@@ -4,21 +4,25 @@ import { Redirect, withRouter } from 'react-router-dom'
 
 import { IMAGE_STATES } from '../constants/states'
 
-class Home extends Component {
+class Puzzle extends Component {
     render() {
+        const {
+            puzzleImage,
+            imageGrid,
+            forShare
+        } = this.props
+
+        if (puzzleImage.state !== IMAGE_STATES.EXIST) return <Redirect to={{
+            pathname: '/share'
+        }} />
         return (
             <article>
                 Puzzle
-                {
-                    this.props.imgState === IMAGE_STATES.NOT_EXIST ? <Redirect to={{
-                        pathname: '/share'
-                    }} /> : 'haha'
-                }
             </article>
         )
     }
 }
 
 export default withRouter(connect(
-    state => ({ imgState: state.puzzleImage.state })
-)(Home))
+    state => _.pick(state, ['puzzleImage', 'imageGrid', 'forShare'])
+)(Puzzle))

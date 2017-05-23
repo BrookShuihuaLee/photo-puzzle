@@ -16,7 +16,7 @@ export async function uploadImage(blob) {
 export async function syncImage(blob) {
     let prefix = new Date().getTime().toString(36)
     let surfix = (Math.random().toString(36) + '0000').substr(2, 4)
-    let extension = blob.name && _.last(blob.name.split('.')) || 'jpg'
+    let extension = blob.name && _.last(blob.name.split('.')) || 'png'
     let path = `${prefix}-${surfix}.${extension}`
     console.log('syncing image: ', path, blob)
     try {

@@ -12,9 +12,9 @@ export async function blobToImage(blob) {
     })
 }
 
-async function canvasToBlob(canvas) {
+async function canvasToBlob(canvas, quality) {
     return await new Promise(resolve => {
-        canvas.toBlob(resolve, 'image/jpeg', 0.8)
+        canvas.toBlob(resolve, 'image/png', quality)
     })
 }
 

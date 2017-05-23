@@ -47,8 +47,7 @@ class GridLines extends Component {
             height: GRID_LINE_WIDTH
         })
 
-        let maskColor = imageGrid.lineColor.split('(')[1].split(')')[0]
-        maskColor = `rgba(${maskColor}, 0.5)`
+        let maskColor = `rgba(${imageGrid.lineColor.match(/\d.*\d/)[0]}, 0.5)`
         return (
             <div style={{
                 ...STYLES.ROOT_STYLE,
