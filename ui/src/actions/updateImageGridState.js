@@ -20,7 +20,7 @@ export function updateHorizontalNum(hn) {
 }
 
 export function updateGridLineColor(blob) {
-    return async function (dispath) {
+    return async dispath => {
         let lineColor = rgbToStr(reverseMeanRGB(await blobToImage(blob)))
         dispath({
             type: UPDATE_IMAGE_GRID_STATE,

@@ -8,7 +8,7 @@ import {
 import { updateGridLineColor } from './updateImageGridState'
 
 export function uploadImage(blob) {
-    return async function (dispatch) {
+    return async dispatch => {
         dispatch({
             type: UPDATE_PUZZLE_IMAGE_STATE,
             state: {
@@ -37,7 +37,7 @@ export function uploadImage(blob) {
 }
 
 export function downloadImage(url) {
-    return async function (dispatch) {
+    return async dispatch => {
         dispatch({
             type: UPDATE_PUZZLE_IMAGE_STATE,
             state: {
@@ -67,7 +67,7 @@ export function downloadImage(url) {
 }
 
 export function downloadImageRandom() {
-    return async function (dispatch, getState) {
+    return async (dispatch, getState) => {
         dispatch({
             type: UPDATE_PUZZLE_IMAGE_STATE,
             state: {

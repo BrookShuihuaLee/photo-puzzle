@@ -26,9 +26,7 @@ class GridLines extends Component {
 
         if (puzzleImage.state !== IMAGE_STATES.EXIST || !imageGrid.lineColor || !forShare.imageW || !forShare.imageH) return null
 
-        let deltaW = forShare.imageW / imageGrid.vn
-        let deltaH = forShare.imageH / imageGrid.hn
-        let delta = Math.min(deltaW, deltaH)
+        let delta = Math.min(forShare.imageW / imageGrid.vn, forShare.imageH / imageGrid.hn)
         let gridW = delta * imageGrid.vn
         let gridH = delta * imageGrid.hn
         let shimTop = (forShare.imageH - gridH) / 2

@@ -1,7 +1,11 @@
 import _ from 'lodash'
 
 import { ORIGIN } from '../constants/puzzle'
-import { blobToImage, resizeBlobImage } from '../global/tools'
+import {
+    blobToImage,
+    resizeBlobImage,
+    splitImg
+} from '../global/tools'
 import cos from './cos-sdk'
 
 export async function uploadImage(blob) {
@@ -52,4 +56,13 @@ export async function downloadImageRandom(pathNow) {
         alert('下载图片失败')
     }
     return await downloadImage(`default/${_.sample(defaultImages.filter(p => `default/${p}` !== pathNow))}`)
+}
+
+export async function splitImage(blob, vn, hn, width) {
+    try {
+        return await splitImg(blob, vn, hn, width)
+    } catch (e) {
+        console.error('split image error: ', e)
+        alert('分割图片失败')
+    }
 }

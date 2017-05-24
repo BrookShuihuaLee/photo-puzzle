@@ -6,3 +6,6 @@ export const MAX_PARTS_NUM = 8
 export const INIT_PARTS_NUM = 3
 
 export const GRID_LINE_WIDTH = 3
+
+export const PUZZLE_MARGIN = 10
+export const BLOCK_MARGIN = 2

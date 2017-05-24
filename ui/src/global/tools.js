@@ -1,6 +1,6 @@
 import _ from 'lodash'
 
-import { MAX_IMG_WIDTH } from '../constants/puzzle'
+import { MAX_IMG_WIDTH, BLOCK_MARGIN } from '../constants/puzzle'
 
 export async function blobToImage(blob) {
     return await new Promise(resolve => {
@@ -119,4 +119,44 @@ export function reverseMeanRGB(img) {
 
 export function rgbToStr(rgb) {
     return `rgb(${rgb.r},${rgb.g},${rgb.b})`
+}
+
+export async function splitImg(blob, vn, hn, width) {
+    let blockLen = (width - BLOCK_MARGIN * (vn - 1)) / vn
+    let img = await blobToImage(blob)
+    let canvas = document.createElement('canvas')
+    canvas.width = canvas.height = blockLen
+    let ctx = canvas.getContext('2d')
+    let sw = img.naturalWidth
+    let sh = img.naturalHeight
+    let sourceBlockLen = Math.min(sw / vn, sh / hn)
+    let shimTop = (sh - sourceBlockLen * hn) / 2
+    let shimLeft = (sw - sourceBlockLen * vn) / 2
+
+    let blocks = []
+    for (let i = 0; i < hn; i++) {
+        for (let j = 0; j < vn; j++) {
+            ctx.drawImage(
+                img,
+                shimLeft + j * sourceBlockLen,
+                shimTop + i * sourceBlockLen,
+                sourceBlockLen,
+                sourceBlockLen,
+                0,
+                0,
+                blockLen,
+                blockLen
+            )
+            blocks.push({
+                x: j,
+                y: i,
+                blobUrl: URL.createObjectURL(await canvasToBlob(canvas))
+            })
+        }
+    }
+
+    return {
+        blockLen,
+        blocks
+    }
 }

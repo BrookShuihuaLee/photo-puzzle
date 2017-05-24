@@ -1,5 +1,5 @@
 export App from './App'
-export Puzzle from './Puzzle'
+export Puzzle from './Puzzle/'
 export Share from './Share/'
 export About from './About'
 export Menu from './Menu'
