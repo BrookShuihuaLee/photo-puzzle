@@ -35,6 +35,8 @@ class Puzzle extends Component {
         return (
             <article style={STYLES.PUZZLE_STYLE}>
                 <Blocks />
+
+                {'isOver:' + forPuzzle.isOver}
             </article>
         )
     }

@@ -4,7 +4,10 @@ import { ORIGIN } from '../constants/puzzle'
 import {
     blobToImage,
     resizeBlobImage,
-    splitImg
+    splitImg,
+    randomSequence,
+    isAdjacent,
+    swapPosition
 } from '../global/tools'
 import cos from './cos-sdk'
 
@@ -60,9 +63,50 @@ export async function downloadImageRandom(pathNow) {
 
 export async function splitImage(blob, vn, hn, width) {
     try {
-        return await splitImg(blob, vn, hn, width)
+        let {
+            blockLen,
+            blocks
+        } = await splitImg(blob, vn, hn, width)
+        function positionToXY(p) {
+            return {
+                x: p % vn,
+                y: Math.floor(p / vn)
+            }
+        }
+        let emptyBlock = positionToXY(_.random(vn * hn - 2))
+        randomSequence(vn * hn - 1).forEach((to, from) => {
+            let x = to % vn
+            let y = Math.floor(to / vn)
+            if (x === vn - 1 && y >= emptyBlock.y) y++
+            else if (y === emptyBlock.y && x >= emptyBlock.x) x++
+            Object.assign(blocks[from], { x, y })
+        })
+        return {
+            blockLen,
+            blocks,
+            emptyBlock
+        }
     } catch (e) {
         console.error('split image error: ', e)
         alert('分割图片失败')
     }
+}
+
+export function clickBlock(block, emptyBlock) {
+    if (isAdjacent(block, emptyBlock)) {
+        swapPosition(block, emptyBlock)
+        console.log('click block valid: ', block, emptyBlock)
+        return true
+    } else {
+        console.log('click block invalid: ', block, emptyBlock)
+        return false
+    }
+}
+
+export function gameIsOver(blocks, emptyBlock, vn, hn) {
+    return (
+        emptyBlock.x === vn - 1 &&
+        emptyBlock.y === hn - 1 &&
+        blocks.every((block, i) => block.x === i % vn && block.y === Math.floor(i / vn))
+    )
 }

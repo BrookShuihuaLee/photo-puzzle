@@ -121,7 +121,7 @@ export function rgbToStr(rgb) {
     return `rgb(${rgb.r},${rgb.g},${rgb.b})`
 }
 
-export async function splitImg(blob, vn, hn, width) {
+export async function splitImg(blob, vn, hn, width, hasLast) {
     let blockLen = (width - BLOCK_MARGIN * (vn - 1)) / vn
     let img = await blobToImage(blob)
     let canvas = document.createElement('canvas')
@@ -136,6 +136,7 @@ export async function splitImg(blob, vn, hn, width) {
     let blocks = []
     for (let i = 0; i < hn; i++) {
         for (let j = 0; j < vn; j++) {
+            if (i === hn - 1 && j === vn - 1) continue
             ctx.drawImage(
                 img,
                 shimLeft + j * sourceBlockLen,
@@ -148,8 +149,6 @@ export async function splitImg(blob, vn, hn, width) {
                 blockLen
             )
             blocks.push({
-                x: j,
-                y: i,
                 blobUrl: URL.createObjectURL(await canvasToBlob(canvas))
             })
         }
@@ -159,4 +158,32 @@ export async function splitImg(blob, vn, hn, width) {
         blockLen,
         blocks
     }
+}
+
+function isValidSequence(a) {
+    let reversedOrderNum = 0
+    for (let i = 0; i < a.length; i++) {
+        for (let j = i + 1; j < a.length; j++) {
+            if (a[i] > a[j]) reversedOrderNum++
+        }
+    }
+    return !(reversedOrderNum % 2)
+}
+
+export function randomSequence(n) {
+    let a = _.shuffle(_.range(n))
+    if (!isValidSequence(a)) [a[0], a[1]] = [a[1], a[0]]
+    return a
+}
+
+export async function requestNextFrame() {
+    await new Promise(requestAnimationFrame)
+}
+
+export function isAdjacent({ x: x1, y: y1 }, { x: x2, y: y2 }) {
+    return x1 === x2 && Math.abs(y1 - y2) === 1 || y1 === y2 && Math.abs(x1 - x2) === 1
+}
+
+export function swapPosition(p1, p2) {
+    [p1.x, p1.y, p2.x, p2.y] = [p2.x, p2.y, p1.x, p1.y]
 }
