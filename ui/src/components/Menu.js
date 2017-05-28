@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { Link, withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
+import _ from 'lodash'
 
 import FloatingActionButton from 'material-ui/FloatingActionButton'
 import ListIcon from 'material-ui/svg-icons/action/list'
@@ -41,6 +43,29 @@ class Menu extends Component {
     render() {
         if (this._lastLocation !== this.props.location) setTimeout(this.closeMenu)
         this._lastLocation = this.props.location
+        let {
+            forPuzzle: {
+                noShare
+            }
+        } = this.props
+
+        let items = [
+            {
+                to: '/puzzle',
+                text: '拼图'
+            },
+            ...noShare ? [] : [
+                {
+                    to: '/share',
+                    text: '分享'
+                }
+            ],
+            {
+                to: '/about',
+                text: '关于'
+            }
+        ]
+
         return (
             <header style={STYLES.HEADER_STYLE}>
                 <FloatingActionButton
@@ -55,44 +80,27 @@ class Menu extends Component {
                 >
                     <GridList
                         cellHeight='auto'
-                        cols={3}
+                        cols={items.length}
                     >
-                        <GridTile style={STYLES.MENU_ITEM_STYLE} >
-                            <Link
-                                to='/puzzle'
-                                replace
-                                style={STYLES.LINK_STYLE}
-                            >
-                                <IconButton>
-                                    <DashBoardIcon color={teal500} />
-                                </IconButton>
-                                <div style={{ color: teal500 }} >拼图</div>
-                            </Link>
-                        </GridTile>
-                        <GridTile style={STYLES.MENU_ITEM_STYLE} >
-                            <Link
-                                to='/share'
-                                replace
-                                style={STYLES.LINK_STYLE}
-                            >
-                                <IconButton>
-                                    <ShareIcon color={teal500} />
-                                </IconButton>
-                                <div style={{ color: teal500 }} >分享</div>
-                            </Link>
-                        </GridTile>
-                        <GridTile style={STYLES.MENU_ITEM_STYLE} >
-                            <Link
-                                to='/about'
-                                replace
-                                style={STYLES.LINK_STYLE}
-                            >
-                                <IconButton>
-                                    <FaceIcon color={teal500} />
-                                </IconButton>
-                                <div style={{ color: teal500 }} >关于</div>
-                            </Link>
-                        </GridTile>
+                        {
+                            items.map(({ to, text }) => (
+                                <GridTile
+                                    key={to}
+                                    style={STYLES.MENU_ITEM_STYLE}
+                                >
+                                    <Link
+                                        to={to}
+                                        replace
+                                        style={STYLES.LINK_STYLE}
+                                    >
+                                        <IconButton>
+                                            <DashBoardIcon color={teal500} />
+                                        </IconButton>
+                                        <div style={{ color: teal500 }} >{text}</div>
+                                    </Link>
+                                </GridTile>
+                            ))
+                        }
                     </GridList>
                 </Dialog>
             </header>
@@ -100,4 +108,8 @@ class Menu extends Component {
     }
 }
 
-export default withRouter(Menu)
+export default withRouter(connect(
+    state => _.pick(state, ['forPuzzle']),
+    {
+    }
+)(Menu))

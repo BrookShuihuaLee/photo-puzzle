@@ -1,41 +1,63 @@
 .fadeInOut-enter {
-  opacity: 0.01;
-  transition: opacity .5s ease-in;
+    opacity: 0.01;
+    transition: opacity .5s ease-in;
 }
 
 .fadeInOut-enter.fadeInOut-enter-active {
-  opacity: 1;
+    opacity: 1;
 }
 
 .fadeInOut-appear {
-  opacity: 0.01;
+    opacity: 0.01;
 }
 
 .fadeInOut-appear.fadeInOut-appear-active {
-  opacity: 1;
-  transition: opacity .5s ease-in;
+    opacity: 1;
+    transition: opacity .5s ease-in;
 }
 
 .fadeInOut-leave {
-  opacity: 1;
-  transition: opacity .5s ease-in;
+    opacity: 1;
+    transition: opacity .5s ease-in;
 }
 
 .fadeInOut-leave.fadeInOut-leave-active {
-  opacity: 0.01;
+    opacity: 0.01;
+}
+
+.fadeOut {
+    opacity: 0;
+    animation: fadeOut 1s;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+}
+
+.fadeIn {
+    opacity: 1;
+    animation: fadeIn 1s;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0
+    }
 }
 
 @keyframes twinkle {
-  0% {
-    opacity: 0;
-  }
-  25% {
-    opacity: 0;
-  }
-  75% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
+    0% {
+        opacity: 0;
+    }
+    25% {
+        opacity: 0;
+    }
+    75% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
 }

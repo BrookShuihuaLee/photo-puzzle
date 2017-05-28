@@ -180,6 +180,10 @@ export async function requestNextFrame() {
     await new Promise(requestAnimationFrame)
 }
 
+export async function sleep(t) {
+    await new Promise(r => setTimeout(r, t))
+}
+
 export function isAdjacent({ x: x1, y: y1 }, { x: x2, y: y2 }) {
     return x1 === x2 && Math.abs(y1 - y2) === 1 || y1 === y2 && Math.abs(x1 - x2) === 1
 }

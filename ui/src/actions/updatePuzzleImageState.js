@@ -19,7 +19,7 @@ export function uploadImage(blob) {
         })
         let res = await uploadImageApi(blob)
         if (res) {
-            dispatch(updateGridLineColor(res.blob))
+            await dispatch(updateGridLineColor(res.blob))
             dispatch({
                 type: UPDATE_PUZZLE_IMAGE_STATE,
                 state: {
@@ -38,7 +38,7 @@ export function uploadImage(blob) {
     }
 }
 
-export function downloadImage(url) {
+export function downloadImage(path) {
     return async (dispatch, getState) => {
         let { puzzleImage } = getState()
         if (puzzleImage.state !== IMAGE_STATES.NOT_EXIST && puzzleImage.state !== IMAGE_STATES.EXIST) return
@@ -48,9 +48,9 @@ export function downloadImage(url) {
                 state: IMAGE_STATES.DOWNLOADING
             }
         })
-        let res = await downloadImageApi()
+        let res = await downloadImageApi(path)
         if (res) {
-            dispatch(updateGridLineColor(res.blob))
+            await dispatch(updateGridLineColor(res.blob))
             dispatch({
                 type: UPDATE_PUZZLE_IMAGE_STATE,
                 state: {
@@ -82,7 +82,7 @@ export function downloadImageRandom() {
         })
         let res = await downloadImageRandomApi(puzzleImage.path)
         if (res) {
-            dispatch(updateGridLineColor(res.blob))
+            await dispatch(updateGridLineColor(res.blob))
             dispatch({
                 type: UPDATE_PUZZLE_IMAGE_STATE,
                 state: {

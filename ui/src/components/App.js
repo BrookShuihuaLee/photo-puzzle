@@ -4,6 +4,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 import { Menu, Puzzle, Share, About, _Home, Config } from '.'
 import './App.less'
+import { fadeOutLoadingPage } from '../apis/'
 
 export default class App extends Component {
     render() {
@@ -24,10 +25,6 @@ export default class App extends Component {
     }
 
     componentDidMount() {
-        const loadingPage = document.getElementById('loadingPage')
-        loadingPage.classList.add('fadeOut')
-        setTimeout(() => {
-            loadingPage.remove()
-        }, 1000)
+        fadeOutLoadingPage()
     }
 }

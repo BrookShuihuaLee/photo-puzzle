@@ -1,4 +1,5 @@
 export const ORIGIN = '//ppb-1251735385.cossh.myqcloud.com'
+export const INDEX_URL = location.origin + location.pathname
 export const MAX_IMG_WIDTH = 1000
 
 export const MIN_PARTS_NUM = 2

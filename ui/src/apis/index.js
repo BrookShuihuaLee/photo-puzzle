@@ -1,6 +1,6 @@
 import _ from 'lodash'
 
-import { ORIGIN } from '../constants/puzzle'
+import { ORIGIN, INDEX_URL } from '../constants/puzzle'
 import {
     blobToImage,
     resizeBlobImage,
@@ -109,4 +109,41 @@ export function gameIsOver(blocks, emptyBlock, vn, hn) {
         emptyBlock.y === hn - 1 &&
         blocks.every((block, i) => block.x === i % vn && block.y === Math.floor(i / vn))
     )
+}
+
+function encodeConfig(path, vn, hn) {
+    return btoa(JSON.stringify({
+        path,
+        vn,
+        hn
+    }))
+}
+
+export function generateShareUrl(path, vn, hn) {
+    return `${INDEX_URL}#/config/${encodeConfig(path, vn, hn)}`
+}
+
+export function decodeConfig(config) {
+    return JSON.parse(atob(config))
+}
+
+export function fadeOutLoadingPage() {
+    const loadingPage = document.getElementById('loadingPage')
+    loadingPage.classList.remove('fadeIn')
+    loadingPage.classList.add('fadeOut')
+    setTimeout(() => loadingPage.style.display = 'none', 1000)
+    return loadingPage
+}
+
+export function showLoadingPage() {
+    const loadingPage = document.getElementById('loadingPage')
+    loadingPage.classList.remove('fadeOut')
+    loadingPage.style.display = null
+    return loadingPage
+}
+
+export function fadeInLoadingPage() {
+    const loadingPage = showLoadingPage()
+    loadingPage.classList.add('fadeIn')
+    return loadingPage
 }

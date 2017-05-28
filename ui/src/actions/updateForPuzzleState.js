@@ -9,7 +9,7 @@ import {
     gameIsOver
 } from '../apis/'
 
-export function startPuzzle(bodyWidth) {
+export function startPuzzle(noShare) {
     return async (dispatch, getState) => {
         let { puzzleImage, imageGrid } = getState()
         let width = document.body.offsetWidth - PUZZLE_MARGIN * 2
@@ -20,6 +20,7 @@ export function startPuzzle(bodyWidth) {
                 state: PUZZLE_STATES.PLAYING,
                 ...await splitImage(puzzleImage.blob, imageGrid.vn, imageGrid.hn, width),
                 isOver: false,
+                noShare,
 
                 ..._.pick(imageGrid, ['vn', 'hn', 'lineColor']),
                 ..._.pick(puzzleImage, ['blobUrl'])
@@ -70,7 +71,8 @@ export function checkGameOver() {
             dispatch({
                 type: UPDATE_FOR_PUZZLE_STATE,
                 state: {
-                    isOver: true
+                    isOver: true,
+                    noShare: false
                 }
             })
         }

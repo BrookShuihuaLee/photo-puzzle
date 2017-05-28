@@ -27,9 +27,7 @@ class Puzzle extends Component {
             pathname: '/share'
         }} />
         if (forPuzzle.state === PUZZLE_STATES.READY) {
-            setTimeout(() => {
-                startPuzzle(document.body.offsetWidth)
-            })
+            setTimeout(startPuzzle)
             return null
         }
 

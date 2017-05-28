@@ -9,6 +9,7 @@ export default function (state = {
     blocks: null,
     emptyBlock: null,
     isOver: null,
+    noShare: null,
     
     //copy from imageGrid
     vn: null,

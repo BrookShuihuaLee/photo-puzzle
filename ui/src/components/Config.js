@@ -1,18 +1,34 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { Redirect } from 'react-router-dom'
 
+import { initializeConfig } from '../actions/configInit'
+import { decodeConfig, showLoadingPage, fadeOutLoadingPage } from '../apis'
+
 class Config extends Component {
-    render() {
+    _decodeConfig = async () => {
         let {
-            match
+            match,
+            history
         } = this.props
-        const config = JSON.parse(atob(match.params.config))
+        const config = decodeConfig(match.params.config)
         console.log('config: ', config)
-        return (
-            <Redirect to='/' />
-        )
+        showLoadingPage()
+        await this.props.initializeConfig(config)
+        fadeOutLoadingPage()
+        history.push('/')
+    }
+
+    render() {
+        setTimeout(this._decodeConfig)
+        return null
     }
 }
 
-export default withRouter(Config)
+export default withRouter(connect(
+    state => ({}),
+    {
+        initializeConfig
+    }
+)(Config))
