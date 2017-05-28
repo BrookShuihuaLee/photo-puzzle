@@ -34,7 +34,7 @@ class GameOverDialog extends Component {
             },
 
             preparePuzzle,
-            sharePuzzle
+            openSharingDialog
         } = this.props
 
         return (

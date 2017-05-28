@@ -8,7 +8,9 @@ import {
 import { updateGridLineColor } from './updateImageGridState'
 
 export function uploadImage(blob) {
-    return async dispatch => {
+    return async (dispatch, getState) => {
+        let { puzzleImage } = getState()
+        if (puzzleImage.state !== IMAGE_STATES.NOT_EXIST && puzzleImage.state !== IMAGE_STATES.EXIST) return
         dispatch({
             type: UPDATE_PUZZLE_IMAGE_STATE,
             state: {
@@ -37,7 +39,9 @@ export function uploadImage(blob) {
 }
 
 export function downloadImage(url) {
-    return async dispatch => {
+    return async (dispatch, getState) => {
+        let { puzzleImage } = getState()
+        if (puzzleImage.state !== IMAGE_STATES.NOT_EXIST && puzzleImage.state !== IMAGE_STATES.EXIST) return
         dispatch({
             type: UPDATE_PUZZLE_IMAGE_STATE,
             state: {
@@ -68,13 +72,15 @@ export function downloadImage(url) {
 
 export function downloadImageRandom() {
     return async (dispatch, getState) => {
+        let { puzzleImage } = getState()
+        if (puzzleImage.state !== IMAGE_STATES.NOT_EXIST && puzzleImage.state !== IMAGE_STATES.EXIST) return
         dispatch({
             type: UPDATE_PUZZLE_IMAGE_STATE,
             state: {
                 state: IMAGE_STATES.DOWNLOADING
             }
         })
-        let res = await downloadImageRandomApi(getState().puzzleImage.path)
+        let res = await downloadImageRandomApi(puzzleImage.path)
         if (res) {
             dispatch(updateGridLineColor(res.blob))
             dispatch({

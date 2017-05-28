@@ -1,6 +1,8 @@
 import injectTapEventPlugin from 'react-tap-event-plugin'
 
-injectTapEventPlugin()
+injectTapEventPlugin({
+    shouldRejectClick: (lastTouchEventTimestamp, clickEventTimestamp) => true
+})
 
 if (!HTMLCanvasElement.prototype.toBlob) {
     Object.defineProperty(HTMLCanvasElement.prototype, 'toBlob', {
