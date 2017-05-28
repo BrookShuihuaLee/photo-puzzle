@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { Link, withRouter } from 'react-router-dom'
 
 import FloatingActionButton from 'material-ui/FloatingActionButton'
@@ -27,12 +26,6 @@ const STYLES = {
 }
 
 class Menu extends Component {
-    static propTypes = {
-        match: PropTypes.object.isRequired,
-        location: PropTypes.object.isRequired,
-        history: PropTypes.object.isRequired
-    }
-
     state = {
         open: false
     }
@@ -66,38 +59,38 @@ class Menu extends Component {
                     >
                         <GridTile style={STYLES.MENU_ITEM_STYLE} >
                             <Link
-                                to="/puzzle"
+                                to='/puzzle'
                                 replace
                                 style={STYLES.LINK_STYLE}
                             >
                                 <IconButton>
                                     <DashBoardIcon color={teal500} />
                                 </IconButton>
-                                <div style={{ color: teal500 }}>拼图</div>
+                                <div style={{ color: teal500 }} >拼图</div>
                             </Link>
                         </GridTile>
                         <GridTile style={STYLES.MENU_ITEM_STYLE} >
                             <Link
-                                to="/share"
+                                to='/share'
                                 replace
                                 style={STYLES.LINK_STYLE}
                             >
                                 <IconButton>
                                     <ShareIcon color={teal500} />
                                 </IconButton>
-                                <div style={{ color: teal500 }}>分享</div>
+                                <div style={{ color: teal500 }} >分享</div>
                             </Link>
                         </GridTile>
                         <GridTile style={STYLES.MENU_ITEM_STYLE} >
                             <Link
-                                to="/about"
+                                to='/about'
                                 replace
                                 style={STYLES.LINK_STYLE}
                             >
                                 <IconButton>
                                     <FaceIcon color={teal500} />
                                 </IconButton>
-                                <div style={{ color: teal500 }}>关于</div>
+                                <div style={{ color: teal500 }} >关于</div>
                             </Link>
                         </GridTile>
                     </GridList>

@@ -39,3 +39,21 @@ export function updateImageWidthAndHeight(imageW, imageH) {
         }
     }
 }
+
+export function openSharingDialog() {
+    return {
+        type: UPDATE_FOR_SHARE_STATE,
+        state: {
+            isSharing: true
+        }
+    }
+}
+
+export function closeSharingDialog() {
+    return {
+        type: UPDATE_FOR_SHARE_STATE,
+        state: {
+            isSharing: false
+        }
+    }
+}

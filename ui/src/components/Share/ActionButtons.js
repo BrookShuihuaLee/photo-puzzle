@@ -5,7 +5,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import _ from 'lodash'
 import { Link } from 'react-router-dom'
 
-import { triggerAdvanced } from '../../actions/updateForShareState'
+import { triggerAdvanced, openSharingDialog } from '../../actions/updateForShareState'
 import { IMAGE_STATES } from '../../constants/states'
 import { preparePuzzle } from '../../actions/updateForPuzzleState'
 
@@ -26,7 +26,8 @@ class ActionButtons extends Component {
             forShare,
 
             triggerAdvanced,
-            preparePuzzle
+            preparePuzzle,
+            openSharingDialog
         } = this.props
 
         if (puzzleImage.state === IMAGE_STATES.NOT_EXIST) return null
@@ -44,6 +45,7 @@ class ActionButtons extends Component {
                         label='分享'
                         style={STYLES.OPTION_BUTTON_STYLE}
                         secondary
+                        onTouchTap={openSharingDialog}
                     />
                     <RaisedButton
                         label={forShare.showAdvanced ? '简洁' : '高级'}
@@ -74,6 +76,7 @@ export default connect(
     state => _.pick(state, ['puzzleImage', 'forShare']),
     {
         triggerAdvanced,
-        preparePuzzle
+        preparePuzzle,
+        openSharingDialog
     }
 )(ActionButtons)

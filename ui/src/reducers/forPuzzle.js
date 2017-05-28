@@ -10,9 +10,13 @@ export default function (state = {
     emptyBlock: null,
     isOver: null,
     
+    //copy from imageGrid
     vn: null,
     hn: null,
-    lineColor: null
+    lineColor: null,
+
+    //copy from puzzleImage
+    blobUrl: null
 }, action) {
     switch (action.type) {
         case UPDATE_FOR_PUZZLE_STATE:

@@ -6,6 +6,7 @@ import { IMAGE_STATES, PUZZLE_STATES } from '../../constants/states'
 import { PUZZLE_MARGIN } from '../../constants/puzzle'
 import { startPuzzle } from '../../actions/updateForPuzzleState'
 import Blocks from './Blocks'
+import GameOverDialog from './GameOverDialog'
 
 const STYLES = {
     PUZZLE_STYLE: {
@@ -35,8 +36,7 @@ class Puzzle extends Component {
         return (
             <article style={STYLES.PUZZLE_STYLE}>
                 <Blocks />
-
-                {'isOver:' + forPuzzle.isOver}
+                <GameOverDialog open={forPuzzle.isOver} />
             </article>
         )
     }

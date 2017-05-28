@@ -6,7 +6,8 @@ export default function (state = {
     imageX: null,
     imageY: null,
     imageW: null,
-    imageH: null
+    imageH: null,
+    isSharing: false
 }, action) {
     switch (action.type) {
         case UPDATE_FOR_SHARE_STATE:

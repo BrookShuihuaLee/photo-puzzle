@@ -13,6 +13,7 @@ export default class Bar extends Component {
         return (
             <article>
                 <Paper style={PAPER_STYLE} zDepth={3} >
+                    <p>一个拼图游戏。可以上传图片。可以分享给别人。</p>
                     <div>作者：Brook</div>
                     <div>邮箱：759916638@qq.com</div>
                     <div>源代码：

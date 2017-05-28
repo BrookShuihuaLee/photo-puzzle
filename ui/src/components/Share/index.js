@@ -5,6 +5,7 @@ import ChoseImage from './ChoseImage'
 import Slides from './Slides'
 import ActionButtons from './ActionButtons'
 import GridLines from './GridLines'
+import SharingDialog from './SharingDialog'
 
 class Share extends Component {
     render() {
@@ -14,6 +15,7 @@ class Share extends Component {
                 <Slides />
                 <ActionButtons />
                 <GridLines />
+                <SharingDialog />
             </article>
         )
     }

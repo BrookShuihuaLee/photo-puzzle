@@ -1,3 +1,5 @@
+import _ from 'lodash'
+
 import { UPDATE_FOR_PUZZLE_STATE } from '../constants/actionTypes'
 import { PUZZLE_STATES } from '../constants/states'
 import { PUZZLE_MARGIN } from '../constants/puzzle'
@@ -19,7 +21,8 @@ export function startPuzzle(bodyWidth) {
                 ...await splitImage(puzzleImage.blob, imageGrid.vn, imageGrid.hn, width),
                 isOver: false,
 
-                ...imageGrid
+                ..._.pick(imageGrid, ['vn', 'hn', 'lineColor']),
+                ..._.pick(puzzleImage, ['blobUrl'])
             }
         })
     }
@@ -58,11 +61,12 @@ export function checkGameOver() {
         let {
             blocks,
             emptyBlock,
+            isOver,
 
             vn,
             hn
         } = getState().forPuzzle
-        if (gameIsOver(blocks, emptyBlock, vn, hn)) {
+        if (!isOver && gameIsOver(blocks, emptyBlock, vn, hn)) {
             dispatch({
                 type: UPDATE_FOR_PUZZLE_STATE,
                 state: {

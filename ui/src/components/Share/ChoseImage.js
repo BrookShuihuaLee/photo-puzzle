@@ -72,6 +72,7 @@ class ChoseImage extends Component {
         })
         if (puzzleImage.state === IMAGE_STATES.EXIST) setTimeout(() => {
             const img = findDOMNode(this.refs.img)
+            if (!img) return
             if (forShare.imageX !== img.offsetLeft || forShare.imageY !== img.offsetTop) updateImagePosition(img.offsetLeft, img.offsetTop)
             if (forShare.imageW !== img.width || forShare.imageH !== img.height) updateImageWidthAndHeight(img.width, img.height)
         })
@@ -94,7 +95,7 @@ class ChoseImage extends Component {
                         type="file"
                         style={STYLES.HIDEN_INPUT_STYLE}
                         onChange={this._uploadFile}
-                        accept='image/*'
+                        accept='image/gif,image/jpeg,image/jpg,image/png,image/svg'
                     />
                 </div>
                 <div style={STYLES.IMAGE_CONTAINER_STYLE}>
