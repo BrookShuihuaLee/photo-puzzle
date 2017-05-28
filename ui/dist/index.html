@@ -1,0 +1,66 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0, maximum-scale=1, minimum-scale=1"><title>拼出我的照片</title></head><body><div id="loadingPage"><div class="container"><div class="cube1"></div><div class="cube2"></div><div class="cube3"></div></div><style>#loadingPage {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  background: white;
+}
+
+#loadingPage .container {
+  margin: 100px auto;
+  width: 70px;
+  height: 70px;
+  position: relative;
+}
+
+.cube1, .cube2, .cube3 {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  
+  animation: cubemove 2s infinite ease-in-out;
+}
+
+#loadingPage .cube1 {
+  background-color: #7986CB;
+}
+
+#loadingPage .cube2 {
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 30px solid #4FC3F7;
+
+  animation-delay: -0.5s;
+}
+
+#loadingPage .cube3 {
+  background-color: #4DD0E1;
+  border-radius: 30px;
+
+  animation-delay: -1s;
+}
+
+@keyframes cubemove {
+  25% {
+    transform: translateX(40px);
+  } 50% {
+    transform: translateX(40px) translateY(40px);
+  } 75% {
+    transform: translateY(40px);;
+  }
+}
+
+.fadeOut {
+  opacity: 0;
+  animation: fadeOut 1s;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+}</style></div><div id="mount"></div><script src="http://ppb-1251735385.cossh.myqcloud.com/js/vendor.f06de524.js"></script><script src="http://ppb-1251735385.cossh.myqcloud.com/js/bundle.754693f6.js"></script></body></html>
