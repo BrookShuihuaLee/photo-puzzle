@@ -38,7 +38,7 @@ const strings = {
     },
     CHANGE_A_PHOTO: {
         ZH: '换张拼图',
-        EN: 'CHANGE A PHOTO'
+        EN: 'CHANGE PHOTO'
     },
     SIMPLE: {
         ZH: '简洁',
