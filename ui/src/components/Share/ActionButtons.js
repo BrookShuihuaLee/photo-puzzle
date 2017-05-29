@@ -52,28 +52,44 @@ class ActionButtons extends Component {
                         style={STYLES.OPTION_BUTTON_STYLE}
                         secondary
                         onTouchTap={openSharingDialog}
+                        disabled={puzzleImage.state !== IMAGE_STATES.EXIST}
                     />
                     <RaisedButton
                         label={forShare.showAdvanced ? SIMPLE : ADVANCED}
                         style={STYLES.OPTION_BUTTON_STYLE}
                         onTouchTap={triggerAdvanced}
+                        disabled={puzzleImage.state !== IMAGE_STATES.EXIST}
                     />
-                    <Link
-                        to="/puzzle"
-                        replace
-                        style={STYLES.OPTION_BUTTON_STYLE}
-                    >
-                        <RaisedButton
-                            label={PLAY}
-                            primary
-                            style={{
-                                width: '100%'
-                            }}
-                            onTouchTap={preparePuzzle}
-                        />
-                    </Link>
+                    {
+                        puzzleImage.state !== IMAGE_STATES.EXIST ? (
+                            <RaisedButton
+                                label={PLAY}
+                                style={STYLES.OPTION_BUTTON_STYLE}
+                                primary
+                                style={{
+                                    width: '100%'
+                                }}
+                                disabled={true}
+                            />
+                        ) : (
+                                <Link
+                                    to="/puzzle"
+                                    replace
+                                    style={STYLES.OPTION_BUTTON_STYLE}
+                                >
+                                    <RaisedButton
+                                        label={PLAY}
+                                        primary
+                                        style={{
+                                            width: '100%'
+                                        }}
+                                        onTouchTap={preparePuzzle}
+                                    />
+                                </Link>
+                            )
+                    }
                 </div>
-            </ReactCSSTransitionGroup>
+            </ReactCSSTransitionGroup >
         )
     }
 }

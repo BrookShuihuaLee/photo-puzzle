@@ -61,7 +61,7 @@ const strings = {
         EN: 'UPLOAD'
     },
     ALT_PHOTO: {
-        ZH: '照 片',
+        ZH: '照片',
         EN: 'PHOTO'
     },
     NOT_NOW: {
