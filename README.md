@@ -2,9 +2,13 @@
 photo puzzle
 
 [中文][1]
+
 [中文DEMO][2]
+
 [老司机DEMO][3]
+
 [ENGLISH][4]
+
 [ENGLISH DEMO][5]
 
 [1]: https://brookshuihualee.github.io/photo-puzzle/ui/dist/
