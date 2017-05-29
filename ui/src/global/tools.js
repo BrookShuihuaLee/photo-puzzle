@@ -191,3 +191,7 @@ export function isAdjacent({ x: x1, y: y1 }, { x: x2, y: y2 }) {
 export function swapPosition(p1, p2) {
     [p1.x, p1.y, p2.x, p2.y] = [p2.x, p2.y, p1.x, p1.y]
 }
+
+export function changeTitle(title) {
+    document.title = title
+}

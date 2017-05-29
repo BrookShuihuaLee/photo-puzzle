@@ -27,7 +27,11 @@ class GridLines extends Component {
         const {
             puzzleImage,
             imageGrid,
-            forShare
+            forShare,
+            languages: {
+                NOT_NOW,
+                CAN_NOT_SEE
+            }
         } = this.props
 
         if (puzzleImage.state !== IMAGE_STATES.EXIST || !imageGrid.lineColor || !forShare.imageW || !forShare.imageH) return null
@@ -116,7 +120,7 @@ class GridLines extends Component {
                                 height: forShare.imageH
                             }}
                         >
-                            { _.sample(['就是不给你看😛', '现在不可以看☺️']).repeat(50) }
+                            { _.sample([NOT_NOW, CAN_NOT_SEE]).repeat(50) }
                         </div>
                     ) : null
                 }
@@ -126,5 +130,5 @@ class GridLines extends Component {
 }
 
 export default connect(
-    state => _.pick(state, ['puzzleImage', 'imageGrid', 'forShare'])
+    state => _.pick(state, ['puzzleImage', 'imageGrid', 'forShare', 'languages'])
 )(GridLines)

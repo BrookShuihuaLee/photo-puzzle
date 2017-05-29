@@ -1,7 +1,7 @@
 import { UPDATE_FOR_PUZZLE_STATE } from '../constants/actionTypes'
 import { PUZZLE_STATES } from '../constants/states'
 
-export default function (state = {
+export default (state = {
     state: PUZZLE_STATES.READY,
     imageW: null,
     imageH: null,
@@ -18,7 +18,7 @@ export default function (state = {
 
     //copy from puzzleImage
     blobUrl: null
-}, action) {
+}, action) => {
     switch (action.type) {
         case UPDATE_FOR_PUZZLE_STATE:
             return {

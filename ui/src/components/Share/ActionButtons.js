@@ -24,6 +24,12 @@ class ActionButtons extends Component {
         const {
             puzzleImage,
             forShare,
+            languages: {
+                SHARE,
+                SIMPLE,
+                ADVANCED,
+                PLAY
+            },
 
             triggerAdvanced,
             preparePuzzle,
@@ -42,13 +48,13 @@ class ActionButtons extends Component {
             >
                 <div style={STYLES.OPTION_BTN_CONTAINER_STYLE} >
                     <RaisedButton
-                        label='分享'
+                        label={SHARE}
                         style={STYLES.OPTION_BUTTON_STYLE}
                         secondary
                         onTouchTap={openSharingDialog}
                     />
                     <RaisedButton
-                        label={forShare.showAdvanced ? '简洁' : '高级'}
+                        label={forShare.showAdvanced ? SIMPLE : ADVANCED}
                         style={STYLES.OPTION_BUTTON_STYLE}
                         onTouchTap={triggerAdvanced}
                     />
@@ -58,7 +64,7 @@ class ActionButtons extends Component {
                         style={STYLES.OPTION_BUTTON_STYLE}
                     >
                         <RaisedButton
-                            label='开始游戏'
+                            label={PLAY}
                             primary
                             style={{
                                 width: '100%'
@@ -73,7 +79,7 @@ class ActionButtons extends Component {
 }
 
 export default connect(
-    state => _.pick(state, ['puzzleImage', 'forShare']),
+    state => _.pick(state, ['puzzleImage', 'forShare', 'languages']),
     {
         triggerAdvanced,
         preparePuzzle,

@@ -64,6 +64,12 @@ class SharingDialog extends Component {
                 vn,
                 hn
             },
+            languages: {
+                lang,
+                SHARE_TITLE,
+                COPY_LINK,
+                COPIED
+            },
 
             closeSharingDialog
         } = this.props
@@ -72,7 +78,7 @@ class SharingDialog extends Component {
         } = this.state
         if (!forShare.isSharing) return null
 
-        const shareUrl = generateShareUrl(path, vn, hn)
+        const shareUrl = generateShareUrl(path, vn, hn, lang)
 
         this._listenCopy(shareUrl)
 
@@ -84,14 +90,14 @@ class SharingDialog extends Component {
                 <div
                     style={STYLES.CONTAINER_STYLE}
                 >
-                    <p>截屏分享 || 链接分享</p>
+                    <p>{SHARE_TITLE}</p>
                     <QRCode
                         value={shareUrl}
                         style={STYLES.QRCODE_STYLE}
                     />
                     <RaisedButton
                         ref='copyBtn'
-                        label={copied ? '已复制' : '复制链接'}
+                        label={copied ? COPIED : COPY_LINK}
                         secondary={!copied}
                         style={STYLES.BUTTON_STYLE}
                     />
@@ -102,7 +108,7 @@ class SharingDialog extends Component {
 }
 
 export default connect(
-    state => _.pick(state, ['forShare', 'puzzleImage', 'imageGrid']),
+    state => _.pick(state, ['forShare', 'puzzleImage', 'imageGrid', 'languages']),
     {
         closeSharingDialog
     }

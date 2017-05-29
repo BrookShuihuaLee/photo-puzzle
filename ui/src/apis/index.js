@@ -111,16 +111,19 @@ export function gameIsOver(blocks, emptyBlock, vn, hn) {
     )
 }
 
-function encodeConfig(path, vn, hn) {
-    return btoa(JSON.stringify({
+function encodeConfig(path, vn, hn, lang) {
+    let config = {}
+    if (path && vn && hn) Object.assign(config, {
         path,
         vn,
         hn
-    }))
+    })
+    if (lang) config.lang = lang
+    return btoa(JSON.stringify(config))
 }
 
-export function generateShareUrl(path, vn, hn) {
-    return `${INDEX_URL}#/config/${encodeConfig(path, vn, hn)}`
+export function generateShareUrl(path, vn, hn, lang) {
+    return `${INDEX_URL}#/config/${encodeConfig(path, vn, hn, lang)}`
 }
 
 export function decodeConfig(config) {

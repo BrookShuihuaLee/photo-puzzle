@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import Paper from 'material-ui/Paper'
+import _ from 'lodash'
 
 const PAPER_STYLE = {
     width: '80%',
@@ -8,15 +10,24 @@ const PAPER_STYLE = {
     wordBreak: 'break-all'
 }
 
-export default class Bar extends Component {
+class About extends Component {
     render() {
+        let {
+            languages: {
+                ABOUT_TITLE,
+                AUTHOR,
+                EMAIL,
+                SOURCE_CODE
+            }
+        } = this.props
+
         return (
             <article>
                 <Paper style={PAPER_STYLE} zDepth={3} >
-                    <p>一个拼图游戏。可以上传图片。可以分享给别人。</p>
-                    <div>作者：Brook</div>
-                    <div>邮箱：759916638@qq.com</div>
-                    <div>源代码：
+                    <p>{ABOUT_TITLE}</p>
+                    <div>{AUTHOR}：Brook</div>
+                    <div>{EMAIL}：759916638@qq.com</div>
+                    <div>{SOURCE_CODE}：
                         <a href='https://github.com/BrookShuihuaLee/photo-puzzle'>
                             https://github.com/BrookShuihuaLee/photo-puzzle
                         </a>
@@ -26,3 +37,7 @@ export default class Bar extends Component {
         )
     }
 }
+
+export default connect(
+    state => _.pick(state, ['languages'])
+)(About)

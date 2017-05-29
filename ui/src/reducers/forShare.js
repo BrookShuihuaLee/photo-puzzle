@@ -1,6 +1,6 @@
 import { UPDATE_FOR_SHARE_STATE } from '../constants/actionTypes'
 
-export default function (state = {
+export default (state = {
     paperHeight: 0,
     showAdvanced: false,
     imageX: null,
@@ -8,7 +8,7 @@ export default function (state = {
     imageW: null,
     imageH: null,
     isSharing: false
-}, action) {
+}, action) => {
     switch (action.type) {
         case UPDATE_FOR_SHARE_STATE:
             return {

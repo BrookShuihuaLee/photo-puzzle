@@ -32,6 +32,11 @@ class GameOverDialog extends Component {
             forPuzzle: {
                 blobUrl
             },
+            languages: {
+                PLAY_AGAIN,
+                SHARE_PUZZLE,
+                CHANGE_A_PHOTO
+            },
 
             preparePuzzle,
             openSharingDialog
@@ -51,7 +56,7 @@ class GameOverDialog extends Component {
                         <IconButton>
                             <ReplayIcon color={teal500} />
                         </IconButton>
-                        <div style={{ color: teal500 }} >再来一次</div>
+                        <div style={{ color: teal500 }} >{PLAY_AGAIN}</div>
                     </GridTile>
                     <GridTile style={STYLES.GRID_ITEM_STYLE} >
                         <Link
@@ -63,7 +68,7 @@ class GameOverDialog extends Component {
                             <IconButton>
                                 <BubbleIcon color={pink500} />
                             </IconButton>
-                            <div style={{ color: pink500 }} >分享拼图</div>
+                            <div style={{ color: pink500 }} >{SHARE_PUZZLE}</div>
                         </Link>
                     </GridTile>
                     <GridTile style={STYLES.GRID_ITEM_STYLE} >
@@ -75,7 +80,7 @@ class GameOverDialog extends Component {
                             <IconButton>
                                 <AutoRenewIcon color={teal500} />
                             </IconButton>
-                            <div style={{ color: teal500 }} >换一张图</div>
+                            <div style={{ color: teal500 }} >{CHANGE_A_PHOTO}</div>
                         </Link>
                     </GridTile>
                 </GridList>
@@ -85,7 +90,7 @@ class GameOverDialog extends Component {
 }
 
 export default connect(
-    state => _.pick(state, ['forPuzzle']),
+    state => _.pick(state, ['forPuzzle', 'languages']),
     {
         preparePuzzle,
         openSharingDialog

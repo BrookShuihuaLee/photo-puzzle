@@ -59,6 +59,11 @@ class ChoseImage extends Component {
         const {
             puzzleImage,
             forShare,
+            languages: {
+                RANDOM_PHOTO,
+                UPLOAD_PHOTO,
+                ALT_PHOTO
+            },
 
             downloadImageRandom,
             updatePaperHeight,
@@ -80,12 +85,12 @@ class ChoseImage extends Component {
         return (
             <div style={STYLES.CHOOSE_IMG_CONTAINER_STYLE}>
                 <div style={STYLES.CHOOSE_IMG_BTN_CONTAINER_STYLE}>
-                    <RaisedButton label='随便来一张'
+                    <RaisedButton label={RANDOM_PHOTO}
                         style={STYLES.CHOOSE_IMG_BTN_STYLE}
                         onTouchTap={downloadImageRandom}
                         disabled={puzzleImage.state !== IMAGE_STATES.NOT_EXIST && puzzleImage.state !== IMAGE_STATES.EXIST}
                     />
-                    <RaisedButton label='上传照片'
+                    <RaisedButton label={UPLOAD_PHOTO}
                         style={STYLES.CHOOSE_IMG_BTN_STYLE}
                         onTouchTap={() => this.refs.fileInput.click()}
                         disabled={puzzleImage.state !== IMAGE_STATES.NOT_EXIST && puzzleImage.state !== IMAGE_STATES.EXIST}
@@ -129,7 +134,7 @@ class ChoseImage extends Component {
                                 circle
                                 onTouchTap={() => this.refs.fileInput.click()}
                             >
-                                <span>照 片</span>
+                                <span>{ALT_PHOTO}</span>
                             </Paper>
 
                     }
@@ -140,7 +145,7 @@ class ChoseImage extends Component {
 }
 
 export default connect(
-    state => _.pick(state, ['puzzleImage', 'imageGrid', 'forShare']),
+    state => _.pick(state, ['puzzleImage', 'imageGrid', 'forShare', 'languages']),
     {
         downloadImageRandom,
         uploadImage,
