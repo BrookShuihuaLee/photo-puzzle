@@ -1,4 +1,5 @@
 import { UPDATE_FOR_SHARE_STATE } from '../constants/actionTypes'
+import { syncImage } from './updatePuzzleImageState'
 
 export function triggerAdvanced() {
     return (dispatch, getState) => {
@@ -41,11 +42,14 @@ export function updateImageWidthAndHeight(imageW, imageH) {
 }
 
 export function openSharingDialog() {
-    return {
-        type: UPDATE_FOR_SHARE_STATE,
-        state: {
-            isSharing: true
-        }
+    return async (dispatch) => {
+        await dispatch(syncImage())
+        dispatch({
+            type: UPDATE_FOR_SHARE_STATE,
+            state: {
+                isSharing: true
+            }
+        })
     }
 }
 

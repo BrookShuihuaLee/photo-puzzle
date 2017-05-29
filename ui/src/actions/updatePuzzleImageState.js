@@ -3,7 +3,8 @@ import { IMAGE_STATES } from '../constants/states'
 import {
     downloadImageRandom as downloadImageRandomApi,
     downloadImage as downloadImageApi,
-    uploadImage as uploadImageApi
+    uploadImage as uploadImageApi,
+    syncImage as syncImageApi
 } from '../apis'
 import { updateGridLineColor } from './updateImageGridState'
 
@@ -24,7 +25,8 @@ export function uploadImage(blob) {
                 type: UPDATE_PUZZLE_IMAGE_STATE,
                 state: {
                     ...res,
-                    state: IMAGE_STATES.EXIST
+                    state: IMAGE_STATES.EXIST,
+                    shouldSync: true
                 }
             })
         } else {
@@ -32,6 +34,25 @@ export function uploadImage(blob) {
                 type: UPDATE_PUZZLE_IMAGE_STATE,
                 state: {
                     state: IMAGE_STATES.NOT_EXIST
+                }
+            })
+        }
+    }
+}
+
+export function syncImage() {
+    return async (dispatch, getState) => {
+        let {
+            blob,
+            shouldSync
+        } = getState().puzzleImage
+        if (shouldSync) {
+            let res = await syncImageApi(blob)
+            dispatch({
+                type: UPDATE_PUZZLE_IMAGE_STATE,
+                state: {
+                    ...res,
+                    shouldSync: false
                 }
             })
         }
@@ -55,7 +76,8 @@ export function downloadImage(path) {
                 type: UPDATE_PUZZLE_IMAGE_STATE,
                 state: {
                     ...res,
-                    state: IMAGE_STATES.EXIST
+                    state: IMAGE_STATES.EXIST,
+                    shouldSync: false
                 }
             })
         } else {
@@ -87,7 +109,8 @@ export function downloadImageRandom() {
                 type: UPDATE_PUZZLE_IMAGE_STATE,
                 state: {
                     ...res,
-                    state: IMAGE_STATES.EXIST
+                    state: IMAGE_STATES.EXIST,
+                    shouldSync: false
                 }
             })
         } else {

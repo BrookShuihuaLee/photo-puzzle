@@ -28,7 +28,7 @@ export async function syncImage(blob) {
     console.log('syncing image: ', path, blob)
     try {
         await cos.uploadFile(`images/${path}`, blob)
-        return path
+        return { path }
     } catch (e) {
         console.error('syncing image error: ', e)
         alert('同步图片失败')

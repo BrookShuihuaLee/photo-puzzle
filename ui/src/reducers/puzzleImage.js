@@ -7,7 +7,8 @@ export default (state = {
     blob: null,
     blobUrl: null,
     width: null,
-    height: null
+    height: null,
+    shouldSync: false
 }, action) => {
     switch (action.type) {
         case UPDATE_PUZZLE_IMAGE_STATE:
