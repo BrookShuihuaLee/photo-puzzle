@@ -133,6 +133,8 @@ export async function splitImg(blob, vn, hn, width, hasLast) {
     let shimTop = (sh - sourceBlockLen * hn) / 2
     let shimLeft = (sw - sourceBlockLen * vn) / 2
 
+    console.log('splitImg: ', sw, sh)
+
     let blocks = []
     for (let i = 0; i < hn; i++) {
         for (let j = 0; j < vn; j++) {
@@ -172,8 +174,8 @@ export async function compressImage(blob) {
     )
 
     let canvas = document.createElement('canvas')
-    canvas.width = height
-    canvas.height = width
+    canvas.width = width
+    canvas.height = height
     let ctx = canvas.getContext('2d')
     ctx.drawImage(img, 0, 0)
     return await canvasToBlob(canvas, quality)
