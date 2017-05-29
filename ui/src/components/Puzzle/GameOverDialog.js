@@ -38,7 +38,10 @@ class GameOverDialog extends Component {
         } = this.props
 
         return (
-            <Dialog open={open}>
+            <Dialog
+                open={open}
+                autoScrollBodyContent={true}
+            >
                 <img src={blobUrl} style={STYLES.ORIGINAL_IMAGE_STYLE} />
                 <GridList
                     cellHeight='auto'
