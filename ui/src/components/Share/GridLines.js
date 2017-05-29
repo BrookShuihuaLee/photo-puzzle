@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import _ from 'lodash'
 
 import { IMAGE_STATES } from '../../constants/states'
 import { GRID_LINE_WIDTH } from '../../constants/puzzle'
@@ -13,6 +14,11 @@ const STYLES = {
     },
     MASK_STYLE: {
         position: 'absolute'
+    },
+    SHARING_MASK_STYLE: {
+        backgroundColor: 'white',
+        opacity: '0.9',
+        overflow: 'hidden'
     }
 }
 
@@ -101,6 +107,19 @@ class GridLines extends Component {
                         top: 0
                     }} />
                 </div>
+                {
+                    forShare.isSharing ? (
+                        <div
+                            style={{
+                                ...STYLES.SHARING_MASK_STYLE,
+                                width: forShare.imageW,
+                                height: forShare.imageH
+                            }}
+                        >
+                            { _.sample(['就是不给你看😛', '现在不可以看☺️']).repeat(50) }
+                        </div>
+                    ) : null
+                }
             </div>
         )
     }
