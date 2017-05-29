@@ -160,6 +160,25 @@ export async function splitImg(blob, vn, hn, width, hasLast) {
     }
 }
 
+export async function compressImage(blob) {
+    let img = await blobToImage(blob)
+    let width = img.naturalWidth
+    let height = img.naturalHeight
+    if (width < 100) return blob
+    let quality = (
+        width < 200 ? 0.8 :
+            width < 400 ? 0.6 :
+                0.4
+    )
+
+    let canvas = document.createElement('canvas')
+    canvas.width = height
+    canvas.height = width
+    let ctx = canvas.getContext('2d')
+    ctx.drawImage(img, 0, 0)
+    return await canvasToBlob(canvas, quality)
+}
+
 function isValidSequence(a) {
     let reversedOrderNum = 0
     for (let i = 0; i < a.length; i++) {
@@ -172,7 +191,7 @@ function isValidSequence(a) {
 
 export function randomSequence(n) {
     let a = _.shuffle(_.range(n))
-    if (!isValidSequence(a)) [a[0], a[1]] = [a[1], a[0]]
+    if (!isValidSequence(a))[a[0], a[1]] = [a[1], a[0]]
     return a
 }
 

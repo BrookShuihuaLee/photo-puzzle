@@ -43,7 +43,7 @@ export function updateImageWidthAndHeight(imageW, imageH) {
 
 export function openSharingDialog() {
     return async (dispatch) => {
-        await dispatch(syncImage())
+        dispatch(syncImage())
         dispatch({
             type: UPDATE_FOR_SHARE_STATE,
             state: {

@@ -1,5 +1,5 @@
 export const ORIGIN = '//ppb-1251735385.cossh.myqcloud.com'
-export const MAX_IMG_WIDTH = 1000
+export const MAX_IMG_WIDTH = 500
 
 export const MIN_PARTS_NUM = 2
 export const MAX_PARTS_NUM = 8

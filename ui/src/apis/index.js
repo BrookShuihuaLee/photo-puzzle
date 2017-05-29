@@ -7,7 +7,8 @@ import {
     splitImg,
     randomSequence,
     isAdjacent,
-    swapPosition
+    swapPosition,
+    compressImage
 } from '../global/tools'
 import cos from './cos-sdk'
 
@@ -21,6 +22,7 @@ export async function uploadImage(blob) {
 }
 
 export async function syncImage(blob) {
+    blob = await compressImage(blob)
     let prefix = new Date().getTime().toString(36)
     let surfix = (Math.random().toString(36) + '0000').substr(2, 4)
     let extension = blob.name && _.last(blob.name.split('.')) || 'png'

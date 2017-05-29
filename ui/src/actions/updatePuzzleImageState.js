@@ -47,14 +47,30 @@ export function syncImage() {
             shouldSync
         } = getState().puzzleImage
         if (shouldSync) {
-            let res = await syncImageApi(blob)
             dispatch({
                 type: UPDATE_PUZZLE_IMAGE_STATE,
                 state: {
-                    ...res,
-                    shouldSync: false
+                    isSyncing: true
                 }
             })
+            let res = await syncImageApi(blob)
+            if (res) {
+                dispatch({
+                    type: UPDATE_PUZZLE_IMAGE_STATE,
+                    state: {
+                        ...res,
+                        shouldSync: false,
+                        isSyncing: false
+                    }
+                })
+            } else {
+                dispatch({
+                    type: UPDATE_PUZZLE_IMAGE_STATE,
+                    state: {
+                        isSyncing: false
+                    }
+                })
+            }
         }
     }
 }

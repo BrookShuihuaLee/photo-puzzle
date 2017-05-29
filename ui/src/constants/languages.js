@@ -99,6 +99,10 @@ const strings = {
     SOURCE_CODE: {
         ZH: '源代码',
         EN: 'Source Code'
+    },
+    SYNCING_PHOTO: {
+        ZH: '正在同步照片',
+        EN: 'SYNCING'
     }
 }
 

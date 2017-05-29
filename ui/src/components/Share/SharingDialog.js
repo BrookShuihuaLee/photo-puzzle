@@ -6,6 +6,7 @@ import Dialog from 'material-ui/Dialog'
 import QRCode from 'qrcode.react'
 import Clipboard from 'clipboard'
 import RaisedButton from 'material-ui/RaisedButton'
+import Spinner from 'react-spinner-material'
 
 import { closeSharingDialog } from '../../actions/updateForShareState'
 import { generateShareUrl } from '../../apis/'
@@ -58,7 +59,8 @@ class SharingDialog extends Component {
         let {
             forShare,
             puzzleImage: {
-                path
+                path,
+                isSyncing
             },
             imageGrid: {
                 vn,
@@ -68,7 +70,8 @@ class SharingDialog extends Component {
                 lang,
                 SHARE_TITLE,
                 COPY_LINK,
-                COPIED
+                COPIED,
+                SYNCING_PHOTO
             },
 
             closeSharingDialog
@@ -78,30 +81,50 @@ class SharingDialog extends Component {
         } = this.state
         if (!forShare.isSharing) return null
 
-        const shareUrl = generateShareUrl(path, vn, hn, lang)
-
-        this._listenCopy(shareUrl)
+        let shareUrl;
+        if (!isSyncing) this._listenCopy(shareUrl = generateShareUrl(path, vn, hn, lang))
 
         return (
             <Dialog
                 open={forShare.isSharing}
                 onRequestClose={closeSharingDialog}
             >
-                <div
-                    style={STYLES.CONTAINER_STYLE}
-                >
-                    <p>{SHARE_TITLE}</p>
-                    <QRCode
-                        value={shareUrl}
-                        style={STYLES.QRCODE_STYLE}
-                    />
-                    <RaisedButton
-                        ref='copyBtn'
-                        label={copied ? COPIED : COPY_LINK}
-                        secondary={!copied}
-                        style={STYLES.BUTTON_STYLE}
-                    />
-                </div>
+                {
+                    isSyncing ? (
+                        <div
+                            style={STYLES.CONTAINER_STYLE}
+                        >
+                            <Spinner width={100}
+                                height={120}
+                                spinnerColor={"#333"}
+                                spinnerWidth={2}
+                                show={true}
+                                style={STYLES.QRCODE_STYLE}
+                            />
+                            <div
+                                style={STYLES.BUTTON_STYLE}
+                            >
+                                {SYNCING_PHOTO}
+                            </div>
+                        </div>
+                    ) : (
+                            <div
+                                style={STYLES.CONTAINER_STYLE}
+                            >
+                                <p>{SHARE_TITLE}</p>
+                                <QRCode
+                                    value={shareUrl}
+                                    style={STYLES.QRCODE_STYLE}
+                                />
+                                <RaisedButton
+                                    ref='copyBtn'
+                                    label={copied ? COPIED : COPY_LINK}
+                                    secondary={!copied}
+                                    style={STYLES.BUTTON_STYLE}
+                                />
+                            </div>
+                        )
+                }
             </Dialog>
         )
     }
