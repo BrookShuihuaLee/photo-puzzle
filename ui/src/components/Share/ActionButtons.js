@@ -66,9 +66,6 @@ class ActionButtons extends Component {
                                 label={PLAY}
                                 style={STYLES.OPTION_BUTTON_STYLE}
                                 primary
-                                style={{
-                                    width: '100%'
-                                }}
                                 disabled={true}
                             />
                         ) : (
