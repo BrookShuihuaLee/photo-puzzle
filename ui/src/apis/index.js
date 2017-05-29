@@ -1,6 +1,6 @@
 import _ from 'lodash'
 
-import { ORIGIN, INDEX_URL } from '../constants/puzzle'
+import { ORIGIN } from '../constants/puzzle'
 import {
     blobToImage,
     resizeBlobImage,
@@ -122,8 +122,12 @@ function encodeConfig(path, vn, hn, lang) {
     return btoa(JSON.stringify(config))
 }
 
+function getIndexUrl() {
+    return location.origin + location.pathname
+}
+
 export function generateShareUrl(path, vn, hn, lang) {
-    return `${INDEX_URL}#/config/${encodeConfig(path, vn, hn, lang)}`
+    return `${getIndexUrl()}#/config/${encodeConfig(path, vn, hn, lang)}`
 }
 
 export function decodeConfig(config) {
