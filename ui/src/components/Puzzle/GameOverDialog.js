@@ -11,10 +11,14 @@ import BubbleIcon from 'material-ui/svg-icons/editor/bubble-chart'
 
 import { preparePuzzle } from '../../actions/updateForPuzzleState'
 import { openSharingDialog } from '../../actions/updateForShareState'
+import CustomDialog from '../CustomWrapper/CustomDialog'
 
 const STYLES = {
     ORIGINAL_IMAGE_STYLE: {
         width: '100%'
+    },
+    GRID_STYLE: {
+        marginBottom: 20
     },
     GRID_ITEM_STYLE: {
         textAlign: 'center'
@@ -43,7 +47,7 @@ class GameOverDialog extends Component {
         } = this.props
 
         return (
-            <Dialog
+            <CustomDialog
                 open={open}
                 autoScrollBodyContent={true}
             >
@@ -51,6 +55,7 @@ class GameOverDialog extends Component {
                 <GridList
                     cellHeight='auto'
                     cols={3}
+                    style={STYLES.GRID_STYLE}
                 >
                     <GridTile style={STYLES.GRID_ITEM_STYLE} onTouchTap={preparePuzzle} >
                         <IconButton>
@@ -84,7 +89,7 @@ class GameOverDialog extends Component {
                         </Link>
                     </GridTile>
                 </GridList>
-            </Dialog>
+            </CustomDialog>
         )
     }
 }
